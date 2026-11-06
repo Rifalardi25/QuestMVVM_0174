@@ -12,16 +12,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.prak9_pam.ui.theme.Prak9_PAMTheme
+import com.example.prak9_pam.view.uicontroller.SiswaApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge() // Membuat aplikasi tampil penuh ke ujung layar (menutupi status bar)
         setContent {
+            // Gunakan Theme bawaan project Anda (biasanya NamaProjectTheme)
             Prak9_PAMTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    // Memanggil pusat navigasi aplikasi Anda
+                    SiswaApp(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
