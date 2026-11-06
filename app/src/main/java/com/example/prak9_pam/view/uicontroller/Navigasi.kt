@@ -1,13 +1,19 @@
 package com.example.prak9_pam.view.uicontroller
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.prak9_pam.model.DataJK
+import com.example.prak9_pam.view.FormSiswa
 import com.example.prak9_pam.viewmodel.SiswaViewModel
 
 
@@ -24,7 +30,23 @@ fun SiswaApp(
 ) {
     Scaffold { isiRuang ->
         val uiState = viewModel.statusUI.collectAsState()
+        NavHost(
+            navController = navController,
+            startDestination = Navigasi.Formulir.name,
+            modifier = Modifier.padding(isiRuang)
+        ) {
+            composable(route = Navigasi.Formulir.name) {
+                val konteks = LocalContext.current
+                FormSiswa(
+                    pilihanJK = DataJK.JenisK.map { id -> konteks.resources.getString(id) },
+                    onSubmitButtonClicked = { dataList ->
+                        viewModel.setSiswa(dataList)
+                        navController.navigate(Navigasi.Detail.name)
+                    }
+                )
+            }
 
 
+        }
     }
 }
