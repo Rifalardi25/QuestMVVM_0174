@@ -28,7 +28,6 @@ fun SiswaApp(
     modifier: Modifier = Modifier,
     viewModel: SiswaViewModel = viewModel(),
     navController: NavHostController = rememberNavController(),
-    cancelAndBackToFormulir: (NavHostController) -> Unit
 ) {
     Scaffold { isiRuang ->
         val uiState = viewModel.statusUI.collectAsState()
@@ -56,6 +55,7 @@ fun SiswaApp(
         }
     }
 }
+
 private fun cancelAndBackToFormulir(
     navController: NavHostController
 ) {
